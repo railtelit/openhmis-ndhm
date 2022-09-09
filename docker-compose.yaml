@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  hrp:
+    build:
+      context: .
+      dockerfile: ./apps/hrp/Dockerfile
+      args:
+        - appname=hrp
+    ports:
+      - 3000:3000
+    environment:
+      - PORT=3000

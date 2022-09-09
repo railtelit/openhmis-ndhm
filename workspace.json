@@ -2,6 +2,8 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "healthid": "apps/healthid"
+    "healthid": "apps/healthid",
+    "hrp": "apps/hrp",
+    "hrp-service": "libs/hrp-service"
   }
 }
