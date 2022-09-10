@@ -1,3 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hrp
+spec:  
+  selector:
+    matchLabels:
+      app: hrp
+  template:
+    metadata:
+      labels:
+        app: hrp
+    spec:
+      imagePullSecrets:
+        - name: jfrogcred
+      containers:        
+      - name: hrp        
+        image: railtelhrit.jfrog.io/ndhm-docker/hrp:latest
+        env:
+          - name: "PORT"
+            value: "3000"
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"        
+        ports:
+        - containerPort: 3000
+---
 apiVersion: v1
 kind: Service
 metadata:
