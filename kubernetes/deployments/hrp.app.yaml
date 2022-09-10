@@ -15,7 +15,7 @@ spec:
         - name: jfrogcred
       containers:        
       - name: hrp        
-        image: railtelhrit.jfrog.io/ndhm-docker/hrm:latest        
+        image: railtelhrit.jfrog.io/ndhm-docker/hrp:latest
         resources:
           limits:
             memory: "128Mi"
