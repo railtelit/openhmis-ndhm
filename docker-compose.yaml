@@ -10,3 +10,4 @@ services:
       - 3000:3000
     environment:
       - PORT=3000
+    image: railtelhrit.jfrog.io/ndhm-docker/hrp:latest
