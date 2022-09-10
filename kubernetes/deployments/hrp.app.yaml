@@ -11,12 +11,15 @@ spec:
       labels:
         app: hrp
     spec:
-      containers:
-      - name: hrp
-        image: railtelhrit.jfrog.io/ndhm-docker/hrm:latest
+      imagePullSecrets:
+        - name: jfrogcred
+      containers:        
+      - name: hrp        
+        image: railtelhrit.jfrog.io/ndhm-docker/hrm:latest        
         resources:
           limits:
             memory: "128Mi"
-            cpu: "500m"
+            cpu: "500m"        
         ports:
         - containerPort: 3000
+      
