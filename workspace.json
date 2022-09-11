@@ -3,7 +3,9 @@
   "version": 2,
   "projects": {
     "healthid": "apps/healthid",
+    "healthid-service": "libs/healthid-service",
     "hrp": "apps/hrp",
-    "hrp-service": "libs/hrp-service"
+    "hrp-service": "libs/hrp-service",
+    "microservice-ndhm-client": "apps/microservice/ndhm-client"
   }
 }

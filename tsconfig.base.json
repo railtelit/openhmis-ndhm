@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@ndhm/healthid-service": ["libs/healthid-service/src/index.ts"],
       "@ndhm/hrp-service": ["libs/hrp-service/src/index.ts"]
     }
   },
