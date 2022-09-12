@@ -29,16 +29,24 @@ export class AppService implements OnModuleInit{
   }
   async loadSessionToken(){
       // 
-
       this.http.post(SESSION_URL,{clientId:this.CLIENT_ID,clientSecret:this.CLIENT_SECRET},
         {headers:{ 'content-type':'application/json' }}).pipe(
           tap(console.log)
       ).subscribe({next:(value)=>{
            this.SESSION_TOKEN=value.data.accessToken
            this.REFRESH_TOKEN=value.data.refreshToken
+           const timeout = setTimeout(()=>{
+               this.refreshToken();
+           },500*1000); // 500 Seconds to Refresh 
       },error(err) {
           console.error(err)
       },})
+  }
+  async refreshToken(){
+      if(this.REFRESH_TOKEN){
+          // Change Logic Later 
+          this.loadSessionToken();
+      }
   }
   
   getData(): { message: string } {

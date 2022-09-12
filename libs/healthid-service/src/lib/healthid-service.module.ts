@@ -1,7 +1,11 @@
 import { Module } from '@nestjs/common';
 import { RouterModule } from '@nestjs/core';
+
+import { AccountModule } from '../account/account.module';
 import { RegistrationController } from '../registration/registration.controller';
 import { RegistrationModule } from '../registration/registration.module';
+
+
 
 export interface PostDataInterface{
      domain:string,
@@ -13,16 +17,20 @@ export interface PostDataInterface{
    
 @Module({
   imports:[
-       RegistrationModule,
+     
+       RegistrationModule,AccountModule,
        RouterModule.register([
             {
                 path:':version',module:RegistrationModule,
+            },
+            {
+                path:':version',module:AccountModule,
             },
        ])
   ],
   controllers: [],
   providers: [],
-  exports: [],
+ 
 })
 export class HealthidServiceModule {}
  
