@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: healthid
+  namespace: ndhm
+spec:  
+  selector:
+    matchLabels:
+      app: healthid
+  template:
+    metadata:
+      labels:
+        app: healthid
+    spec:
+      imagePullSecrets:
+        - name: jfrogcred
+      containers:        
+      - name: healthid        
+        image: railtelhrit.jfrog.io/ndhm-docker/healthid:latest
+        env:
+          - name: "PORT"
+            value: "3000"
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"        
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: healthid-service
+  namespace: ndhm
+spec:
+  selector:
+    app: healthid
+  type: ClusterIP
+  ports:
+  - port: 3000
+    targetPort: 3000

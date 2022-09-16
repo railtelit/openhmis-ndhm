@@ -1,12 +1,18 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable, OnModuleInit } from '@nestjs/common';
-import { catchError, map, tap } from 'rxjs';
+import { catchError, map, of, tap } from 'rxjs';
 import { DOMAINS, SESSION_URL } from './configuration';
 
 export interface PostDataInterface{
   domain:string,
   context:string,
   data:any,
+  headers:any
+}
+export interface GetDataInterface{
+  domain:string,
+  context:string,
+  params:any,
   headers:any
 }
 
@@ -24,7 +30,7 @@ export class AppService implements OnModuleInit{
   /// NBDM APPLICATION CLIENT  
 
   onModuleInit() {
-        // console.log(`CLIENTID : ${this.CLIENT_ID} , CS : ${this.CLIENT_SECRET}`)
+      //   console.log(`CLIENTID : ${this.CLIENT_ID} , CS : ${this.CLIENT_SECRET}`)
         this.loadSessionToken();
   }
   async loadSessionToken(){
@@ -49,7 +55,7 @@ export class AppService implements OnModuleInit{
       }
   }
   
-  getData(): { message: string } {
+  testgetData(): { message: string } {
     return { message: 'Welcome to ndhm-client!' };
   }
  
@@ -60,11 +66,55 @@ export class AppService implements OnModuleInit{
            'Authorization':`Bearer ${this.SESSION_TOKEN}`}; 
            // Set Rest EndPoint
            const ENDPOINT = `${DOMAINS[domain].URL}/${payload.context}`
-           console.log(`Domaian : ${ENDPOINT} `,payload.data,headers)
+           console.log(`Domaian : ${ENDPOINT} `,payload,headers)
        return this.http.post(ENDPOINT,payload.data||{},
               {headers}).pipe(
                   map(value=>value.data),
-                  catchError((err)=>({...err}))                  
+                  catchError((err)=> {
+                      console.log('There is Error ', Object.keys(err.message))
+                      console.log(ENDPOINT,payload.data,headers)
+                        return of({error:'Error:'})
+                  }  )                  
+              )
+  }
+  async getData(payload:GetDataInterface){
+       const domain=payload.domain 
+       const headers={ ...payload?.headers,
+           'content-type':'application/json','Accept-Language':'en-US',
+           'Authorization':`Bearer ${this.SESSION_TOKEN}`}; 
+           // Set Rest EndPoint
+
+           const ENDPOINT = `${DOMAINS[domain].URL}/${payload.context}`
+           console.log(`Domaian : ${ENDPOINT} `,payload,headers)
+       return this.http.get(ENDPOINT,{params: payload.params||{},
+                    headers },
+              ).pipe(
+                //   tap(r=>{
+                //          console.log(r.headers,r.data)
+                //   }),
+                  map(value=>value.data),
+                //   catchError((err)=> {
+                //       console.log('There is Error ', Object.keys(err.message))
+                //       console.log(ENDPOINT,payload.params,headers)
+                //         return of({error:'Error: ' })
+                //   }  )                  
+              )
+  }
+  async getBinaryData(payload:GetDataInterface){
+       const domain=payload.domain 
+       const headers={ ...payload?.headers,
+           'content-type':'application/json','Accept-Language':'en-US',
+           'Authorization':`Bearer ${this.SESSION_TOKEN}`}; 
+           // Set Rest EndPoint
+
+           const ENDPOINT = `${DOMAINS[domain].URL}/${payload.context}`
+           console.log(`Domaian : ${ENDPOINT} `,payload,headers)
+       return this.http.get(ENDPOINT,{params: payload.params||{},
+                    headers , responseType:'arraybuffer'},
+              ).pipe(
+              
+                  map(value=>value.data),
+                        
               )
   }
 }
