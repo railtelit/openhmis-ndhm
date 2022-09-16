@@ -20,6 +20,10 @@ spec:
         env:
           - name: "PORT"
             value: "3000"
+          - name: "MS_NDHM_CLIENT_HOST"
+            value: "ndhm-client"
+          - name: "MS_NDHM_CLIENT_PORT"
+            value: "3000"
         resources:
           limits:
             memory: "128Mi"
