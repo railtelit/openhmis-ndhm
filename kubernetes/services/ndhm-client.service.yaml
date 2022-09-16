@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ndhm-client
+  namespace: ndhm
+spec:  
+  selector:
+    matchLabels:
+      app: ndhm-client
+  template:
+    metadata:
+      labels:
+        app: ndhm-client
+    spec:
+      imagePullSecrets:
+        - name: jfrogcred
+      containers:        
+      - name: ndhm-client        
+        image: railtelhrit.jfrog.io/ndhm-docker/ndhm-client:latest
+        env:
+          - name: "PORT"
+            value: "3000"
+          - name: "CLIENT_ID"
+            valueFrom:
+              secretKeyRef:
+                name: sandboxsecret
+                key: CLIENT_ID
+          - name: "CLIENT_SECRET"
+            valueFrom:
+              secretKeyRef:
+                name: sandboxsecret
+                key: CLIENT_SECRET
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"        
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ndhm-client-service
+  namespace: ndhm
+spec:
+  selector:
+    app: ndhm-client
+  type: ClusterIP
+  ports:
+  - port: 3000
+    targetPort: 3000

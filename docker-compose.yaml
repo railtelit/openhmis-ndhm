@@ -21,4 +21,19 @@ services:
       - 3001:3000
     environment:
       - PORT=3000
+      - MS_NDHM_CLIENT_HOST=ndhm-client
+      - MS_NDHM_CLIENT_PORT=3000
     image: railtelhrit.jfrog.io/ndhm-docker/healthid:latest
+  ndhm-client:
+    build:
+      context: .
+      dockerfile: ./apps/microservice/ndhm-client/Dockerfile
+      args:
+        - appname=ndhm-client
+    ports:
+      - 3002:3000
+    environment:
+      - PORT=3000
+    env_file:
+      - .env
+    image: railtelhrit.jfrog.io/ndhm-docker/ndhm-client:latest

@@ -11,13 +11,14 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule,{transport:Transport.TCP,options:{port:3500,host:'127.0.0.1'}});
-  const globalPrefix = 'api';
-  //app.setGlobalPrefix(globalPrefix);
+  const HOST_LISTEN='0.0.0.0'
   const port = process.env.PORT || 3500;
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule,{transport:Transport.TCP,options:{port:Number(port),host:HOST_LISTEN}});
+  const globalPrefix = 'api';  
+  //app.setGlobalPrefix(globalPrefix);
   await app.listen();
   Logger.log(
-    `🚀 Application __ NDHM-CLIENT  is running on: http://localhost:${port}/${globalPrefix}`
+    `🚀 Application __ NDHM-CLIENT  is running on all: http://${HOST_LISTEN}:${port}/${globalPrefix}`
   );
 }
 
