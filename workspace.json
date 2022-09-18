@@ -6,6 +6,8 @@
     "healthid-service": "libs/healthid-service",
     "hrp": "apps/hrp",
     "hrp-service": "libs/hrp-service",
+    "microservice-hip": "apps/microservice/hip",
+    "microservice-hiu": "apps/microservice/hiu",
     "microservice-ndhm-client": "apps/microservice/ndhm-client"
   }
 }

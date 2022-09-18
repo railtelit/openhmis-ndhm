@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
+import { EventPattern, Payload } from '@nestjs/microservices';
 
 import { AppService } from './app.service';
 
@@ -11,10 +12,11 @@ export class AppController {
     return this.appService.getData();
   }
 
+  /// this is kafka 
 
-  @Get('kafka')
-  async testkafka(){
+  @EventPattern('hello')
+  async kafkahelloservice(@Payload() msg:any){
       //
-      return this.appService.testkafka();
+      console.log(`Kafka Got Hello `,msg,typeof msg.number)
   }
 }

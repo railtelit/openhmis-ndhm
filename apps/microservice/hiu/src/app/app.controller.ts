@@ -10,11 +10,4 @@ export class AppController {
   getData() {
     return this.appService.getData();
   }
-
-
-  @Get('kafka')
-  async testkafka(){
-      //
-      return this.appService.testkafka();
-  }
 }
