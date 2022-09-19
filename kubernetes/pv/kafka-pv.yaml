@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: kafka-pv
+  labels:
+    type: kafkalocal
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/kubernetes/pv/kafka"
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mypvc
+spec:
+  storageClassName: manual
+  resources:
+    requests:
+      storage: <Size>
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce

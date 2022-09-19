@@ -11,7 +11,7 @@ import { AppModule } from './app/app.module';
 
 const LISTEN_ADDRESS= process.env.LISTTEN_ADDRESS || `0.0.0.0`;
 //const KAFKA_BROKER_COUNT=Number(process.env.KAFKA_BROKER_COUNT)||1;
-const KAFKA_BROKER_ADDRESSLIST=process.env.KAFKA_BROKER_ADDRESS||`192.168.1.26:9092`
+const KAFKA_BROKER_ADDRESSLIST=process.env.KAFKA_BROKER_ADDRESSLIST||`192.168.1.26:9092`
 async function bootstrap() {
   console.log(`Brokers `,KAFKA_BROKER_ADDRESSLIST);
   const  brokers:string[]=KAFKA_BROKER_ADDRESSLIST.split(',')

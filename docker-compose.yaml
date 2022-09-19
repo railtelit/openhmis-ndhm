@@ -23,6 +23,7 @@ services:
       - PORT=3000
       - MS_NDHM_CLIENT_HOST=ndhm-client
       - MS_NDHM_CLIENT_PORT=3000
+      - KAFKA_BROKER_ADDRESSLIST=192.168.1.26
     image: railtelhrit.jfrog.io/ndhm-docker/healthid:latest
   ndhm-client:
     build:
@@ -37,3 +38,29 @@ services:
     env_file:
       - .env
     image: railtelhrit.jfrog.io/ndhm-docker/ndhm-client:latest
+  hip:
+    build:
+      context: .
+      dockerfile: ./apps/microservice/hip/Dockerfile
+      args:
+        - appname=hip
+    ports:
+      - 3003:3000
+    environment:
+      - PORT=3000
+    env_file:
+      - .env
+    image: railtelhrit.jfrog.io/ndhm-docker/hip:latest
+  hiu:
+    build:
+      context: .
+      dockerfile: ./apps/microservice/hiu/Dockerfile
+      args:
+        - appname=hiu
+    ports:
+      - 3004:3000
+    environment:
+      - PORT=3000
+    env_file:
+      - .env
+    image: railtelhrit.jfrog.io/ndhm-docker/hiu:latest
