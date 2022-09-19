@@ -20,6 +20,8 @@ spec:
         env:
           - name: "PORT"
             value: "3000"
+          - name: "KAFKA_BROKER_ADDRESSLIST"
+            value: "kafka-cluster-kafka-brokers.kafka:9092"
         resources:
           limits:
             memory: "128Mi"
