@@ -9,7 +9,7 @@ const MS_NDHM_CLIENT_HOST = process.env.MS_NDHM_CLIENT_HOST||'127.0.0.1'
 const MS_NDHM_CLIENT_PORT = process.env.MS_NDHM_CLIENT_PORT||3500
 
 const KAFKA_BROKER_ADDRESSLIST=process.env.KAFKA_BROKER_ADDRESSLIST||`192.168.1.26:9092`
-
+console.log(`Client KAFKA Connecting `,KAFKA_BROKER_ADDRESSLIST);
 @Module({
   imports: [
     ClientsModule.register([
