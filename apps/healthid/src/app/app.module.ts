@@ -15,7 +15,7 @@ console.log(`Client KAFKA Connecting `,KAFKA_BROKER_ADDRESSLIST);
     ClientsModule.register([
       {name:'NDHM_CLIENT_SERVICE',options:{host:MS_NDHM_CLIENT_HOST,port:MS_NDHM_CLIENT_PORT}},
       {name:'HIP_CONNECTOR',transport:Transport.KAFKA ,options:{client:{clientId:'HIP-CLIENT',
-          brokers:KAFKA_BROKER_ADDRESSLIST.split(','), },consumer:{groupId:'HIP'} }  }
+          brokers:KAFKA_BROKER_ADDRESSLIST.split(','), },consumer:{groupId:'HIP'}, },  }
     ]),  
     HealthidServiceModule,
   ],

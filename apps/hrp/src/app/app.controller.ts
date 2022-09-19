@@ -9,6 +9,7 @@ export class AppController {
 
   @Get('heartbeat')
   getHeartBeat() {
+    console.log(`Hearbeat On`,(new Date()));
     return {
        timestamp:new Date(),
        status:"UP",
