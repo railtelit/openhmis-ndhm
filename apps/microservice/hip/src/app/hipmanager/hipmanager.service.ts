@@ -11,10 +11,11 @@ export class HipmanagerService {
 
 
         async onCarecontextDiscover(request:any){
-                const reqestId = new uuid(); 
+                const requestId = uuid(); 
+                console.log(`Generate UUID `,requestId);
                 const timeStamp = new Date(); 
-                const patient = { referenceNumber:"TEST-PAT-1",display:request.patient?.id }
-                const data={reqestId,timeStamp,transactionId:request.transactionId,
+                const patient = { referenceNumber:"TEST-PAT-1",display:request.patient?.id ||'Patient-Test' }
+                const data={requestId,timeStamp,transactionId:request.transactionId,
                                 careContexts:[
                                                  {referenceNumber:"CARE-ID-1",display:"TEST-ENCOUNTER"}
                                 ],

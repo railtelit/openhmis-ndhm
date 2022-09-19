@@ -18,6 +18,7 @@ async function bootstrap() {
   Logger.log(
     `🚀 HealthId Application is running on: http://localhost:${port}/${globalPrefix}`
   );
+  
 }
 
 bootstrap();
