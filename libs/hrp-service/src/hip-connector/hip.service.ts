@@ -9,7 +9,7 @@ export class HipService {
              }
 
              sendMessage(topic:string, request:any){
-                 console.log(`Sending Message`, topic, request);
+                 console.log(`Sending Message`, topic, JSON.stringify(request));
                  this.hipConnector.emit(topic,request)
              }
 
