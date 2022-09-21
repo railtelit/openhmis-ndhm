@@ -5,17 +5,20 @@
 
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { MicroserviceOptions } from '@nestjs/microservices';
 
 import { AppModule } from './app/app.module';
-
+const LISTEN_ADDRESS=process.env.LISTEN_ADDRESS||`0.0.0.0`
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const port = Number(process.env.PORT) || 3400;
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule,{
+        options:{host:LISTEN_ADDRESS,port}
+  });
   const globalPrefix = 'api';
-  app.setGlobalPrefix(globalPrefix);
-  const port = process.env.PORT || 3333;
-  await app.listen(port);
+  //app.setGlobalPrefix(globalPrefix);
+  await app.listen();
   Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
+    `🚀 ndhmStore Application is running on: http://localhost:${port}`
   );
 }
 

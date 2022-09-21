@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 
 import { AppService } from './app.service';
 
@@ -16,5 +16,15 @@ export class AppController {
   async testkafka(){
       //
       return this.appService.testkafka();
+  }
+
+  @Get('store')
+  async testStore(){
+      return this.appService.querylogs();
+  }
+
+  @Post('store')
+  async postStore(@Body() data:any){
+       return this.appService.createlog(data)
   }
 }

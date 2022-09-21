@@ -1,4 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
+import { MessagePattern } from '@nestjs/microservices';
+import { RequestLog, RequestLogModel, RequestLogSchemaClass } from '../entity/store.entity';
 
 import { AppService } from './app.service';
 
@@ -10,4 +12,17 @@ export class AppController {
   getData() {
     return this.appService.getData();
   }
+
+  @MessagePattern({QUERY:'RequestLog'})
+  async  getLogs(){
+       return    this.appService.getLogs();
+  }
+
+  @MessagePattern({CREATE:'RequestLog'})
+  async  createLog(payload:RequestLogSchemaClass){
+
+       return    this.appService.createLog(payload);
+  }
+
+
 }
