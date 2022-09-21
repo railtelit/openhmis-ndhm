@@ -8,6 +8,7 @@
     "hrp-service": "libs/hrp-service",
     "microservice-hip": "apps/microservice/hip",
     "microservice-hiu": "apps/microservice/hiu",
-    "microservice-ndhm-client": "apps/microservice/ndhm-client"
+    "microservice-ndhm-client": "apps/microservice/ndhm-client",
+    "microservice-ndhm-store": "apps/microservice/ndhm-store"
   }
 }
