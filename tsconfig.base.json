@@ -15,8 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@ndhm/config": ["libs/config/src/index.ts"],
       "@ndhm/healthid-service": ["libs/healthid-service/src/index.ts"],
-      "@ndhm/hrp-service": ["libs/hrp-service/src/index.ts"]
+      "@ndhm/hrp-service": ["libs/hrp-service/src/index.ts"],
+      "@ndhm/interfaces": ["libs/interfaces/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

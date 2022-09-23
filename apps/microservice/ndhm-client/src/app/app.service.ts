@@ -71,9 +71,9 @@ export class AppService implements OnModuleInit{
               {headers}).pipe(
                   map(value=>value.data),
                   catchError((err)=> {
-                      console.log('There is Error ', JSON.stringify(err.message))
+                      console.error('There is Error ', JSON.stringify(err.message))
                       console.log(ENDPOINT,payload.data,headers)
-                        return of({error:'Error:'})
+                        return of({error:err})
                   }  )                  
               )
   }

@@ -3,6 +3,7 @@
  * This is only a minimal backend to get started.
  */
 
+import { ApplicationConfig } from '@ndhm/config';
 import { Logger } from '@nestjs/common';
 
 import { NestFactory } from '@nestjs/core';
@@ -12,14 +13,15 @@ import { AppModule } from './app/app.module';
 
 async function bootstrap() {
   const HOST_LISTEN='0.0.0.0'
-  const port = process.env.PORT || 3500;
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule,{transport:Transport.TCP,options:{port:Number(port),
+  const port = process.env.PORT || ApplicationConfig.microservice.NDHM_CLIENT.PORT;
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule,{transport:Transport.TCP,
+    options:{port:Number(port),
     host:HOST_LISTEN}});
   const globalPrefix = 'api';  
   //app.setGlobalPrefix(globalPrefix);
   await app.listen();
   Logger.log(
-    `🚀 Application __ NDHM-CLIENT  is running on all: http://${HOST_LISTEN}:${port}/${globalPrefix}`
+    `🚀 Application Micro-Service NDHM-CLIENT  is running on all: http://${HOST_LISTEN}:${port}/${globalPrefix}`
   );
 }
 

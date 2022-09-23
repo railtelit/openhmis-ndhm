@@ -1,3 +1,4 @@
+import { AppEventPatterns } from '@ndhm/config';
 import { Controller, Get } from '@nestjs/common';
 import { EventPattern, Payload } from '@nestjs/microservices';
 
@@ -5,11 +6,13 @@ import { AppService } from './app.service';
 import { CarecontextManagerService } from './carecontext-manager/carecontext-manager.service';
 import { HipmanagerService } from './hipmanager/hipmanager.service';
 import { PostDataInterface } from './ndhm-client.interface';
+import { ProfileManagerService } from './profile-manager/profile-manager.service';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService,private hipService:HipmanagerService,
-      private careContextManager:CarecontextManagerService) {}
+      private careContextManager:CarecontextManagerService,
+      private profileManager:ProfileManagerService) {}
 
   @Get()
   getData() {
@@ -44,6 +47,12 @@ export class AppController {
         // When Patient Confirms the Linking
         console.log(`Handling Link Confirm`,request); 
         this.careContextManager.onPatientLinkConfirm(request)
+  }
+
+  @EventPattern(AppEventPatterns.patient.profile.share)
+  async patientProfileShare(@Payload() request:PostDataInterface){
+            console.log(`On Profile Share`); 
+            this.profileManager.onPatientProfileShare(request)
   }
 
 }

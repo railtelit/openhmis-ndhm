@@ -1,3 +1,4 @@
+import { AppEventPatterns } from '@ndhm/config';
 import { Body, Controller, Headers, Post, Req } from '@nestjs/common';
 import { HipService } from './hip.service';
 
@@ -12,9 +13,10 @@ export class HipConnectorController {
     async patientProfileShare(
       @Headers('Authorization') authToken: string,
       @Headers('X-HIP-ID') hipid: string,
-      @Body() request
+      @Body() request,@Req() req
     ) {      
-      console.log('On-Profile-Share',request)
+      console.log('On-Profile-Share',request) ; 
+      this.hipService.sendMessage(AppEventPatterns.patient.profile.share, {headers:req.headers,data:request} )
       //
       //return {};
     }
@@ -41,3 +43,5 @@ export class HipConnectorController {
             return {}
     }
 }
+
+

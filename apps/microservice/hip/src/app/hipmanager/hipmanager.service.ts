@@ -1,3 +1,4 @@
+import { ServiceNames } from '@ndhm/config';
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import {v4 as uuid} from 'uuid'
@@ -5,7 +6,7 @@ import { PostDataInterface } from '../ndhm-client.interface';
 @Injectable()
 export class HipmanagerService {
 
-        constructor(@Inject('NDHM_CLIENT_SERVICE') private ndhmClient:ClientProxy){
+        constructor(@Inject(ServiceNames.NDHM_CLIENT_SERVICE) private ndhmClient:ClientProxy){
                 //
         }
 
@@ -36,6 +37,7 @@ export class HipmanagerService {
                          console.error(err)
                 }})
         }
+
 
 
        

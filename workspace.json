@@ -2,13 +2,16 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
+    "config": "libs/config",
     "healthid": "apps/healthid",
     "healthid-service": "libs/healthid-service",
     "hrp": "apps/hrp",
     "hrp-service": "libs/hrp-service",
+    "interfaces": "libs/interfaces",
     "microservice-hip": "apps/microservice/hip",
     "microservice-hiu": "apps/microservice/hiu",
     "microservice-ndhm-client": "apps/microservice/ndhm-client",
-    "microservice-ndhm-store": "apps/microservice/ndhm-store"
+    "microservice-ndhm-store": "apps/microservice/ndhm-store",
+    "testnest": "apps/testnest"
   }
 }

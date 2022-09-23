@@ -3,6 +3,7 @@
  * This is only a minimal backend to get started.
  */
 
+import { ApplicationConfig } from '@ndhm/config';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
@@ -13,7 +14,7 @@ async function bootstrap() {
   app.enableCors();
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
-  const port = process.env.PORT || 3333;
+  const port = process.env.PORT || ApplicationConfig.api.HEALTHID_API.PORT;
   await app.listen(port);
   Logger.log(
     `🚀 HealthId Application is running on: http://localhost:${port}/${globalPrefix}`

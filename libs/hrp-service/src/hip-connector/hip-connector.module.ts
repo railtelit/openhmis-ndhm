@@ -5,6 +5,7 @@ import { HipService } from './hip.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 
 const KAFKA_BROKER_ADDRESSLIST = process.env.KAFKA_BROKER_ADDRESSLIST||`localhost:9092`
+console.log(`Brokers`,KAFKA_BROKER_ADDRESSLIST);
 @Module({
   imports:[
       ClientsModule.register([

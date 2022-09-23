@@ -1,3 +1,5 @@
+import { PostDataInterface } from '@ndhm/healthid-service';
+import { DataInterface } from '@ndhm/interfaces';
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 
@@ -8,7 +10,7 @@ export class HipService {
                     //
              }
 
-             sendMessage(topic:string, request:any){
+             sendMessage(topic:string, request:DataInterface){
                  console.log(`Sending Message`, topic, JSON.stringify(request));
                  this.hipConnector.emit(topic,request)
              }

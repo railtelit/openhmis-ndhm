@@ -3,19 +3,26 @@
  * This is only a minimal backend to get started.
  */
 
+import { ApplicationConfig, EnvironmentNames } from '@ndhm/config';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { KafkaOptions, Transport } from '@nestjs/microservices';
 
 import { AppModule } from './app/app.module';
-
+const KAFKA_BROKER_ADDRESSLIST=process.env[EnvironmentNames.kafka.BROKER_ADDRESSLIST]||ApplicationConfig.kafka.DEFAULT_BROKERS
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  const globalPrefix = 'api';
-  app.setGlobalPrefix(globalPrefix);
   const port = process.env.PORT || 3333;
-  await app.listen(port);
+  const app = await NestFactory.createMicroservice<KafkaOptions>(AppModule,{
+      transport:Transport.KAFKA,options:{
+            client:{brokers:KAFKA_BROKER_ADDRESSLIST.split(',') },
+            consumer:{groupId:'HIU'}
+      }
+  });
+  const globalPrefix = 'api';
+  //app.setGlobalPrefix(globalPrefix);
+  await app.listen();
   Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
+    `🚀 HIU KAFKA Microservice Application is running on: http://localhost:${port}/`
   );
 }
 

@@ -10,6 +10,7 @@ services:
       - 3000:3000
     environment:
       - PORT=3000
+      - KAFKA_BROKER_ADDRESSLIST=192.168.1.26:9092
     image: railtelhrit.jfrog.io/ndhm-docker/hrp:latest
   healthid:
     build:
@@ -48,6 +49,11 @@ services:
       - 3003:3000
     environment:
       - PORT=3000
+      - KAFKA_BROKER_ADDRESSLIST=192.168.1.26:9092
+      - MS_PATIENT_STORE_HOST=192.168.1.26
+      - MS_PATIENT_STORE_PORT=3600
+      - MS_NDHM_CLIENT_HOST=ndhm-client
+      - MS_NDHM_CLIENT_PORT=3000
     env_file:
       - .env
     image: railtelhrit.jfrog.io/ndhm-docker/hip:latest

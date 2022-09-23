@@ -16,7 +16,9 @@ async function bootstrap() {
   console.log(`Brokers `,KAFKA_BROKER_ADDRESSLIST);
   const  brokers:string[]=KAFKA_BROKER_ADDRESSLIST.split(',')
   const app = await NestFactory.createMicroservice<KafkaOptions>(AppModule,{     
-     transport:Transport.KAFKA,options:{client:{brokers},consumer:{groupId:'HIP'}}
+     transport:Transport.KAFKA,options:{client:{brokers},consumer:{groupId:'HIP'},
+           
+        },
   });
   // const globalPrefix = 'api';
   //app.setGlobalPrefix(globalPrefix);
