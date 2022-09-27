@@ -33,13 +33,15 @@ export class HipConnectorController {
     }
 
     @Post('health-information/hip/request')
-    async healthInfoHipRequest(){
-        return {}
+    async healthInfoHipRequest(@Body() data){
+      console.log(`Health Info /hip/request `,data)
+      return {}
     }
-
-
+    
+    
     @Post('patients/sms/on-notify')
-    async patientsSmsOnNotify(){
+    async patientsSmsOnNotify(@Body() data){
+      console.log(` /pat/sms/on-notify `,data)
             return {}
     }
 }

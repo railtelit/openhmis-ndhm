@@ -14,10 +14,13 @@ import { AppModule } from './app/app.module';
 async function bootstrap() {
   const HOST_LISTEN='0.0.0.0'
   const port = process.env.PORT || ApplicationConfig.microservice.NDHM_CLIENT.PORT;
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule,{transport:Transport.TCP,
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule,{
+    transport:Transport.TCP,
     options:{port:Number(port),
-    host:HOST_LISTEN}});
+    host:HOST_LISTEN , },logger:['verbose','error']
+  });
   const globalPrefix = 'api';  
+  
   //app.setGlobalPrefix(globalPrefix);
   await app.listen();
   Logger.log(

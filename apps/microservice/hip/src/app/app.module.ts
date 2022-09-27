@@ -17,8 +17,11 @@ console.log(`Connecting Patient Store `,PATIENT_STORE_HOST,PATIENT_STORE_PORT)
   imports: [
     ClientsModule.register([
       {
+        
         name: ServiceNames.NDHM_CLIENT_SERVICE,
-        options: { host: MS_NDHM_CLIENT_HOST, port: MS_NDHM_CLIENT_PORT },
+        options: { host: MS_NDHM_CLIENT_HOST, port: MS_NDHM_CLIENT_PORT,
+              
+           },
       },
       {        
         name:ServiceNames.PATIENT_STORE_SERVICE,options:{ host:PATIENT_STORE_HOST,port:PATIENT_STORE_PORT ,  }

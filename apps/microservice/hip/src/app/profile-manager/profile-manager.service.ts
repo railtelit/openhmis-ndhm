@@ -37,9 +37,11 @@ export class ProfileManagerService {
             // notify on-share
             const confirmMessage={ requestId: uuid(),timestamp:new Date(),
                         acknowledgement:{ status:'SUCCESS',healthId:patient.healthId } ,
-                        resp:{requestId:payload.data.requestId } }
-            const notifyPayload:PostDataInterface={context:`v0.5/patients/profile/on-share`,domain:'GATEWAY',
-                       data:confirmMessage,headers:{'x-cm-id':'sbx'} };
+                        resp:{requestId:payload.data.requestId } }; 
+          
+            const notifyPayload:PostDataInterface={context:`v0.5/patients/profile/on-share`,
+                         domain:'GATEWAY',
+                       data:confirmMessage,headers:{'x-cm-id':'sbx','X-CM-ID':'sbx'} };
             console.log(`Confirm On-Share`,confirmMessage)
             this.ndhmClientService.send({METHOD:'POST'},notifyPayload).subscribe({
                next:(console.log),
