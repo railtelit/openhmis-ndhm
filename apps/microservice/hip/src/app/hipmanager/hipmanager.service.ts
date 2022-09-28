@@ -41,7 +41,7 @@ export class HipmanagerService implements OnApplicationBootstrap {
                         data,headers:{'X-CM-ID':'sbx','x-cm-id':'sbx'} } as PostDataInterface; 
                 await this.ndhmClient.connect();
                 
-                this.ndhmClient.send ( {METHOD:'POST'},payload).pipe(timeout(4000),retry(2),)
+                this.ndhmClient.send ( {METHOD:'POST'},payload).pipe(timeout(4000),retry(1),)
                 .subscribe({next:(response)=>{
                          //
                          console.log(`On-discover was Complete .. `,response)
