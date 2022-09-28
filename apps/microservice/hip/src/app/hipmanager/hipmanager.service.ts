@@ -12,12 +12,14 @@ export class HipmanagerService implements OnApplicationBootstrap {
         }
 
         async onApplicationBootstrap() {
-             await this.ndhmClient.connect().catch(err=>{
-                 console.error(`Unable to Connect Ndhm Client `, err)
-             }).then(r=>{
-                     console.log(`HIP->NDHMCLIENT:READY`)
-             })
+        //      await this.ndhmClient.connect().catch(err=>{
+        //          console.error(`Unable to Connect Ndhm Client `, err)
+        //      }).then(r=>{
+        //              console.log(`HIP->NDHMCLIENT:READY`)
+        //      })
         }
+
+
 
 
         async onCarecontextDiscover(request:any){
@@ -39,7 +41,7 @@ export class HipmanagerService implements OnApplicationBootstrap {
                           }
                 const payload = { domain:'GATEWAY',context:`v0.5/care-contexts/on-discover`,
                         data,headers:{'X-CM-ID':'sbx','x-cm-id':'sbx'} } as PostDataInterface; 
-                await this.ndhmClient.connect();
+                //await this.ndhmClient.connect();
                 
                 this.ndhmClient.send ( {METHOD:'POST'},payload).pipe(timeout(4000),retry(1),)
                 .subscribe({next:(response)=>{
@@ -53,6 +55,6 @@ export class HipmanagerService implements OnApplicationBootstrap {
 
 
 
-       
+        
 
 }
