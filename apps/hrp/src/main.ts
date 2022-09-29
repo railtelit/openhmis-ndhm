@@ -13,6 +13,7 @@ import { API_VERSION } from './app/version';
 async function bootstrap() {
   const port = process.env.PORT || ApplicationConfig.api.HRP_API.PORT;
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   const globalPrefix = API_VERSION;
   app.setGlobalPrefix(globalPrefix);
   await app.listen(port);

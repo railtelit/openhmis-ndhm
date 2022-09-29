@@ -43,7 +43,7 @@ spec:
                 key: CLIENT_SECRET
         resources:
           limits:
-            memory: "128Mi"
+            memory: "328Mi"
             cpu: "600m"
         ports:
         - containerPort: 3000

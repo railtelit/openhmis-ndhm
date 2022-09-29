@@ -19,7 +19,8 @@ console.log(`Connecting Patient Store `,PATIENT_STORE_HOST,PATIENT_STORE_PORT)
       {        
         name: ServiceNames.NDHM_CLIENT_SERVICE,
             transport:Transport.TCP as any,
-            options: { host: MS_NDHM_CLIENT_HOST, port: MS_NDHM_CLIENT_PORT},
+            options: { host: MS_NDHM_CLIENT_HOST, port: MS_NDHM_CLIENT_PORT, keepalive:0,keepAlive:0,
+               },
       },
       {        
         name:ServiceNames.PATIENT_STORE_SERVICE,options:{ host:PATIENT_STORE_HOST,port:PATIENT_STORE_PORT ,  }
